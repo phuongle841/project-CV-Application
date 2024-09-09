@@ -1,12 +1,8 @@
 import { useState } from "react";
-export default function PracticalExperience() {
-  const [companyName, setCompanyName] = useState("DAT HUNG");
-  const [positionTitle, setPositionTitle] = useState("Software engineer");
-  const [mainResponsibilities, setMainResponsibilities] = useState(
-    "front-end developer"
-  );
-  const [isActive, setIsActive] = useState(true);
-
+import { Structure } from "./structure";
+export default function PracticalExperience({ id = 2 }) {
+  const content = Structure[id].content;
+  const [isActive, setIsActive] = useState(false);
   function changeState() {
     isActive ? setIsActive(false) : setIsActive(true);
   }
@@ -16,48 +12,45 @@ export default function PracticalExperience() {
         {"General Information"}
         <button onClick={changeState}> {isActive ? "save" : "edit"}</button>
       </p>
-      <SubSection
-        title={"companyName"}
-        content={companyName}
-        isActive={isActive}
-        hook={setCompanyName}
-      ></SubSection>
-
-      <SubSection
-        title={"positionTitle"}
-        content={positionTitle}
-        isActive={isActive}
-        hook={setPositionTitle}
-      ></SubSection>
-
-      <SubSection
-        title={"mainResponsibilities"}
-        content={mainResponsibilities}
-        isActive={isActive}
-        hook={setMainResponsibilities}
-      ></SubSection>
+      {Object.keys(content).map((title, id) => {
+        return (
+          <SubSection
+            key={title}
+            title={title}
+            content={content[title]}
+            isActive={isActive}
+          ></SubSection>
+        );
+      })}
     </div>
   );
 }
 
-function SubSection({ title, content, isActive, hook }) {
+export function SubSection({ title, content, isActive }) {
+  const [newContent, SetNewContent] = useState(content);
   return (
-    <div className={title}>
-      <p>{title} </p>{" "}
-      <span>
+    <div>
+      <>
         {isActive ? (
-          <input
-            type="text"
-            name={title}
-            value={content}
-            onChange={(e) => {
-              hook(e.target.value);
-            }}
-          />
+          <p>
+            {title}
+            {": "}
+          </p>
         ) : (
-          <span>{content}</span>
+          <></>
         )}
-      </span>
+      </>
+      {isActive ? (
+        <input
+          type="text"
+          value={newContent}
+          onChange={(e) => {
+            SetNewContent(e.target.value);
+          }}
+        />
+      ) : (
+        <span>{newContent}</span>
+      )}
     </div>
   );
 }

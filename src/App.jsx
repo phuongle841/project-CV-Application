@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { Structure } from "./components/structure";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const content = Structure[1].content;
+  const [defaultData, setDefaultData] = useState(content);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <ModifyPanel contents={defaultData} hook={setDefaultData}></ModifyPanel>
+      <div id="content" style={{ border: "2px solid black" }}>
+        <ContentPanel contents={defaultData}></ContentPanel>
+        <TitlePanel contents={defaultData}></TitlePanel>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+function TitlePanel({ contents }) {
+  return (
+    <div>
+      {Object.keys(contents).map((content, id) => {
+        return <p key={id}>{contents[content]}</p>;
+      })}
+    </div>
+  );
+}
+function ContentPanel({ contents }) {
+  return (
+    <div>
+      {Object.keys(contents).map((content, id) => {
+        return <p key={id}>{content}</p>;
+      })}
+    </div>
+  );
+}
+function ModifyPanel({ contents, hook }) {
+  return (
+    <div>
+      {Object.keys(contents).map((content, id) => {
+        return (
+          <input
+            key={id}
+            type="text"
+            value={contents[content]}
+            onChange={(e) => {
+              const newObject = { ...contents, [`${content}`]: e.target.value };
+              hook(newObject);
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+export default App;

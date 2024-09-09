@@ -67,8 +67,3 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
-/* addition */
-#root > div > div > p:nth-child(n) {
-  display: inline-block;
-}

@@ -1,11 +1,19 @@
 export const Structure = [
   {
     title: "general information",
-    content: { Children: ["name", "email", "phone"] },
+    content: {
+      name: "John the Henry",
+      email: "abcdfjk@gmail.com",
+      phone: "12345678",
+    },
   },
   {
     title: "educational experience",
-    content: { Children: ["name", "school name", "date of study"] },
+    content: {
+      "school name": "International University",
+      Major: "Computer Science",
+      "date of study": "14/08/2020",
+    },
   },
   {
     title: "practical experience",

@@ -1,24 +1,28 @@
 import { useState } from "react";
-
-export default function GeneralInformation() {
-  const [name, setName] = useState("Henry");
-  const [email, setEmail] = useState("Phuongleminh841@gmail.com");
-  const [phone, setPhone] = useState("0357068797");
+import { Structure } from "./structure";
+import { SubSection } from "./practicalExperience";
+export default function GeneralInformation({ id = 0 }) {
+  const content = Structure[id].content;
+  const [isActive, setIsActive] = useState(false);
+  function changeState() {
+    isActive ? setIsActive(false) : setIsActive(true);
+  }
   return (
     <div className="GeneralInformation">
-      <p>General Information</p>
-      <div className="name">
-        <p>name: </p>
-        <p>{name}</p>
-      </div>
-      <div className="email">
-        <p>email: </p>
-        <p>{email}</p>
-      </div>
-      <div className="phone">
-        <p>phone: </p>
-        <p>{phone}</p>
-      </div>
+      <p>
+        {"General Information"}{" "}
+        <button onClick={changeState}> {isActive ? "save" : "edit"}</button>
+      </p>
+      {Object.keys(content).map((title, id) => {
+        return (
+          <SubSection
+            key={title}
+            title={title}
+            content={content[title]}
+            isActive={isActive}
+          ></SubSection>
+        );
+      })}
     </div>
   );
 }
