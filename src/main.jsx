@@ -7,6 +7,5 @@ import EducationalExperience from "./components/educationalExperience";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <App></App>
-    <EducationalExperience></EducationalExperience>
   </StrictMode>
 );

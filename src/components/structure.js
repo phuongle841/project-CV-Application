@@ -9,11 +9,18 @@ export const Structure = [
   },
   {
     title: "educational experience",
-    content: {
-      "school name": "International University",
-      Major: "Computer Science",
-      "date of study": "14/08/2020",
-    },
+    content: [
+      {
+        "school name": "International University",
+        Major: "Computer Science",
+        "date of study": "14/08/2020",
+      },
+      {
+        "school name": "University of Science and Technology",
+        Major: "Computer Science",
+        "date of study": "14/08/2020",
+      },
+    ],
   },
   {
     title: "practical experience",

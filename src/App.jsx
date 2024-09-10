@@ -3,21 +3,45 @@ import { Structure } from "./components/structure";
 import "./App.css";
 
 function App() {
-  const content = Structure[1].content;
+  const content = Structure[1].content[0];
+  const title = Structure[1].title;
+
   const [defaultData, setDefaultData] = useState(content);
+  const [isActive, setIsActive] = useState(false);
 
   return (
-    <>
-      <ModifyPanel contents={defaultData} hook={setDefaultData}></ModifyPanel>
-      <div id="content" style={{ border: "2px solid black" }}>
-        <ContentPanel contents={defaultData}></ContentPanel>
-        <TitlePanel contents={defaultData}></TitlePanel>
-      </div>
-    </>
+    <div id={title}>
+      <h3>{title}</h3>
+      <CustomSection list={Structure[1].content}></CustomSection>
+    </div>
+  );
+}
+function CustomSection({ list }) {
+  // is open is for differ education experience {use number}
+  const [isOpen, setIsOpen] = useState(true);
+  const [defaultData, setDefaultData] = useState(list);
+  console.log(defaultData);
+  return (
+    <div>
+      {list.map((content, index) => {
+        return (
+          <div key={index}>
+            <p>{index} content</p>
+            <ModifyPanel
+              childId={index}
+              defaultData={defaultData}
+              hook={setDefaultData}
+            ></ModifyPanel>
+            <TitlePanel childId={index} defaultData={defaultData}></TitlePanel>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
-function TitlePanel({ contents }) {
+function TitlePanel({ childId, defaultData }) {
+  const contents = defaultData[childId];
   return (
     <div>
       {Object.keys(contents).map((content, id) => {
@@ -26,16 +50,9 @@ function TitlePanel({ contents }) {
     </div>
   );
 }
-function ContentPanel({ contents }) {
-  return (
-    <div>
-      {Object.keys(contents).map((content, id) => {
-        return <p key={id}>{content}</p>;
-      })}
-    </div>
-  );
-}
-function ModifyPanel({ contents, hook }) {
+
+function ModifyPanel({ childId, defaultData, hook }) {
+  const contents = defaultData[childId];
   return (
     <div>
       {Object.keys(contents).map((content, id) => {
@@ -45,8 +62,20 @@ function ModifyPanel({ contents, hook }) {
             type="text"
             value={contents[content]}
             onChange={(e) => {
-              const newObject = { ...contents, [`${content}`]: e.target.value };
-              hook(newObject);
+              console.log(content);
+
+              const newObject = {
+                ...defaultData[childId],
+                [content]: e.target.value,
+              };
+
+              const newData = [...defaultData.toSpliced(childId, 1, newObject)];
+
+              console.log(newData);
+              hook(newData);
+
+              // const newObject = { ...contents, [`${content}`]: e.target.value };
+              // hook(newObject);
             }}
           />
         );
