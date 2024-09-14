@@ -24,13 +24,13 @@ export default function ModifyPanel({
           };
           const newData = [...defaultData.toSpliced(childId, 1, newObject)];
           hook(newData);
+          onChangeStructure(newData);
         }
         function handleInput(e) {
           swapContentCurrentChild(e.target.value);
         }
         function handleSave() {
           setConstData(defaultData);
-          onChangeStructure();
           setIsActive(false);
         }
         function handleCancel() {
@@ -39,7 +39,7 @@ export default function ModifyPanel({
         }
 
         return (
-          <div key={id}>
+          <div key={id} className="modifySection">
             {id === 0 && !isActive && (
               <button onClick={handleActive}>{`${contents[content]}`}</button>
             )}

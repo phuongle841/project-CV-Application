@@ -6,11 +6,13 @@ export default function AddPanel({ defaultData, hook, onChangeStructure }) {
     defaultData.push(newObject);
     const newData = [...defaultData];
     hook(newData);
+    console.log(newData);
+
     onChangeStructure(newData);
 
     function whiteningNewObject(newObject) {
       Object.keys(newObject).map((attribute) => {
-        newObject[attribute] = "new data";
+        newObject[attribute] = "...";
       });
     }
   }

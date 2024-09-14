@@ -29,16 +29,16 @@ export default function CustomSection({
                 hook={setDefaultData}
                 onChangeStructure={onChangeStructure}
               ></ModifyPanel>
-              <AddPanel
-                defaultData={defaultData}
-                hook={setDefaultData}
-                onChangeStructure={onChangeStructure}
-                parentIndex={parentIndex}
-              ></AddPanel>
             </div>
           </div>
         );
       })}
+      <AddPanel
+        defaultData={defaultData}
+        hook={setDefaultData}
+        onChangeStructure={onChangeStructure}
+        parentIndex={parentIndex}
+      ></AddPanel>
     </div>
   );
 }

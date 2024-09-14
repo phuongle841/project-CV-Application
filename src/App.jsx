@@ -5,27 +5,25 @@ import "./App.css";
 import CustomSection from "./components/CustomSection";
 
 function App() {
-  const [structure, setStructure] = useState(Structure);
+  const [structures, setStructure] = useState(Structure);
   return (
     <div id="container">
-      <div>
-        <h3>{Structure[0].title}</h3>
-        <CustomSection
-          list={Structure[0].content}
-          structure={structure}
-          setStructure={setStructure}
-          parentIndex={0}
-        ></CustomSection>
-        <CustomSection
-          list={Structure[1].content}
-          structure={structure}
-          setStructure={setStructure}
-          parentIndex={1}
-        ></CustomSection>
+      <div id="modifyPanel">
+        {structures.map((structure, id) => (
+          <div key={id}>
+            <h3>{structure.title}</h3>
+            <CustomSection
+              list={structures[id].content}
+              structure={structures}
+              setStructure={setStructure}
+              parentIndex={id}
+            ></CustomSection>
+          </div>
+        ))}
       </div>
 
-      <div>
-        <DisplayStructure structure={structure}></DisplayStructure>
+      <div key={crypto.randomUUID()} id="displayPanel">
+        <DisplayStructure structure={structures}></DisplayStructure>
       </div>
     </div>
   );
@@ -33,25 +31,20 @@ function App() {
 
 function DisplayStructure({ structure }) {
   return (
-    <div>
+    <>
       {structure.map((section, index) => {
-        return (
-          <div key={index}>
-            <DisplayPanel section={section}></DisplayPanel>
-          </div>
-        );
+        return <DisplayPanel section={section} key={index}></DisplayPanel>;
       })}
-    </div>
+    </>
   );
 }
 
 function DisplayPanel({ section }) {
   return (
     <div className="section">
-      {section.title}
+      <h2 className="title">{section.title}</h2>
       {Object.keys(section.content).map((panel, j) => {
         const contents = section.content[j];
-
         return <DisplayContents contents={contents} key={j}></DisplayContents>;
       })}
     </div>
@@ -59,18 +52,12 @@ function DisplayPanel({ section }) {
 }
 
 function DisplayContents({ contents }) {
-  console.log(contents);
-
   return (
-    <>
+    <div className="content">
       {Object.keys(contents).map((content, id) => (
-        <div key={id}>
-          <p>
-            {content}:{contents[content]}
-          </p>
-        </div>
+        <p key={id}>{contents[content]}</p>
       ))}
-    </>
+    </div>
   );
 }
 
