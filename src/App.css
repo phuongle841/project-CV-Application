@@ -3,7 +3,17 @@
   margin: 0 auto;
   padding: 2rem;
 }
-
+#container {
+  display: flex;
+}
+.section {
+  display: flex;
+  padding: 10px;
+  gap: 3px;
+}
+.section > div {
+  border: 2px solid #333;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
