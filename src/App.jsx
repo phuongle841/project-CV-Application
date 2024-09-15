@@ -41,7 +41,7 @@ function DisplayStructure({ structure }) {
 
 function DisplayPanel({ section }) {
   return (
-    <div className="section">
+    <div className="section" id={section.title}>
       <h2 className="title">{section.title}</h2>
       {Object.keys(section.content).map((panel, j) => {
         const contents = section.content[j];

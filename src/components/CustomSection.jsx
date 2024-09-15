@@ -42,14 +42,3 @@ export default function CustomSection({
     </div>
   );
 }
-
-function DisplayPanel({ defaultData }) {
-  const contents = defaultData[childId];
-  return (
-    <div>
-      {Object.keys(contents).map((content, id) => {
-        return <p key={id}>{contents[content]}</p>;
-      })}
-    </div>
-  );
-}

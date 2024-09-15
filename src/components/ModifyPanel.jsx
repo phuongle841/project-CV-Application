@@ -12,7 +12,7 @@ export default function ModifyPanel({
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <div style={{ padding: "10px" }}>
+    <div className="modifyContent">
       {Object.keys(contents).map((content, id) => {
         function handleActive() {
           isActive ? setIsActive(false) : setIsActive(true);
@@ -35,16 +35,22 @@ export default function ModifyPanel({
         }
         function handleCancel() {
           hook(constData);
+          onChangeStructure(constData);
           setIsActive(false);
         }
-
+        function handleDelete(params) {
+          const newData = [...defaultData.toSpliced(childId, 1)];
+          hook(newData);
+          onChangeStructure(newData);
+        }
         return (
-          <div key={id} className="modifySection">
+          <>
             {id === 0 && !isActive && (
-              <button onClick={handleActive}>{`${contents[content]}`}</button>
+              <span onClick={handleActive}>{contents[content]}</span>
             )}
             {isActive && (
               <div>
+                <span key={id}>{content}: </span>
                 <input
                   type="text"
                   value={contents[content]}
@@ -56,9 +62,10 @@ export default function ModifyPanel({
               <div>
                 <button onClick={handleSave}>save</button>
                 <button onClick={handleCancel}>cancel</button>
+                <button onClick={handleDelete}>delete</button>
               </div>
             )}
-          </div>
+          </>
         );
       })}
     </div>

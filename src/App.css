@@ -4,16 +4,28 @@
   padding: 2rem;
 }
 #container {
+  width: 1200px;
+  height: 1000px;
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 30px;
 }
 #modifyPanel {
-  padding: 10px;
+  background-color: #fff;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+}
+#modifyPanel > div {
+  width: 100%;
+}
+#modifyPanel > div > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .section {
   padding: 10px;
@@ -24,23 +36,98 @@
   background-color: #bbb;
 }
 #displayPanel {
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 10px 25px;
 }
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.modifyContent {
+  padding: 10px;
+  display: grid;
+  gap: 5px;
+  border-radius: 5px;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.modifyContent > span:hover {
+  cursor: pointer;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.modifyContent > div {
+  display: flex;
+  justify-content: space-between;
 }
-
+.modifyContent > div > input {
+  border: #b1a4a4 solid 1px;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #000;
+}
+button:hover {
+  background-color: #fff;
+  color: #000;
+}
+.modifyContent > div > input:focus {
+  border: 2px solid #000;
+  outline: none;
+}
+.modifySection > span {
+  display: flex;
+  width: 100%;
+  padding: 5px;
+}
+#General\ Information > .content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+#Educational\ Experience,
+#Practical\ Experience {
+  display: grid;
+  gap: 10px;
+}
+#Educational\ Experience > div,
+#Practical\ Experience > div {
+  display: grid;
+  gap: 4px;
+  grid-template-columns: 1fr 5fr;
+}
+#Educational\ Experience > div > p:nth-child(3) {
+  grid-column: 1;
+  grid-row: 2;
+}
+#Educational\ Experience > div > p:nth-child(4) {
+  grid-column: 1;
+  grid-row: 1;
+}
+#Educational\ Experience > div > p {
+  margin: 0;
+}
+.section:nth-child(3) > .content {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+.section:nth-child(3) > .content > p {
+  margin: 0;
+}
+.section:nth-child(3) > .content > p:nth-child(3) {
+  grid-row: 2;
+  grid-column: 2;
+}
+.section:nth-child(3) > .content > p:nth-child(3) {
+  grid-column: 1;
+  grid-row: 1;
+}
+.section:nth-child(3) > .content > p:nth-child(4) {
+  grid-column: 1;
+  grid-row: 2;
+}
+.section:nth-child(3) > .content > p:nth-child(5) {
+  grid-row: 4;
+  grid-column: 2;
+}
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
